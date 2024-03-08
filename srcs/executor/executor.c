@@ -125,7 +125,6 @@ static void	child(const t_tree *const node, const int16_t fds[5], const int8_t p
 {
 	const t_parser *const	elem = (t_parser *)node->content;
 
-	panic(99, "PANICATO\n");
 	if (prev_type == PIPELINE)
 		dup2_p(fds[2], STDIN_FILENO);
 	replace_env_vars(&elem->cmd->cmd_str, false);
