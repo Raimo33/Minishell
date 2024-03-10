@@ -13,3 +13,11 @@
    fun:add_history
    ...
 }
+
+{
+   <Descriptive name of your suppression>
+   Memcheck:Leak
+   ...
+   fun:readline_internal_char
+   ...
+}

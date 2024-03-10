@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 00:48:18 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/10 19:19:36 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 22:31:32 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 
 void	exec_simple_cmd(const char *const path, char *cmd_str)
 {
-	pid_t	pid;
+	const pid_t	pid = fork_p();
 
-	pid = fork_p();
 	if (pid == 0)
+	{
+		signal_p(SIGTERM, &safe_exit);
 		exec(path, ft_strdup(cmd_str, TMP));
+	}
 	wait(NULL);
 }
 
@@ -42,7 +44,6 @@ void	exec(const char *const path, char *cmd_str)
 		cmd_path = get_cmd_path(path, cmd_args[0]);
 		if (!cmd_path)
 			exit(CMD_NOT_FOUND);
-		set_signals(S_COMMAND, false);
 		execve(cmd_path, cmd_args, data->envp_matrix);
 		if (errno != ENOEXEC)
 			panic(EXEC_FAILURE, ft_strjoin("minishell: failed to execute command: ", cmd_args[0], TMP));

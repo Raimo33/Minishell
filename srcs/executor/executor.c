@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:46:08 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/10 19:19:14 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:16:48 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void	executor(const t_tree *const parsed_params)
 	uint8_t			heredoc_status;
 	int16_t			fds[5] = {-42, -42, -42, -42, -42};//pipe read, pipe write, prev_output, original stdin, original stdout
 
+	set_signals(S_COMMAND);
 	fds[3] = dup_p(STDIN_FILENO);
 	fds[4] = dup_p(STDOUT_FILENO);
 	heredoc_status = 0;
@@ -91,6 +92,7 @@ static void	launch_standard_cmd(const t_tree *const node, const int8_t prev_type
 
 	if (pid == 0)
 	{
+		signal_p(SIGTERM, &safe_exit);
 		if (elem->type == PIPELINE)
 		{
 			dup2_p(fds[1], STDOUT_FILENO);

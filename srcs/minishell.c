@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 17:09:22 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/06 21:50:05 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 22:31:52 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	minishell_loop(void)
 
 	while (true)
 	{
-		set_signals(S_INTERACTIVE, true);
+		set_signals(S_INTERACTIVE);
 		input = readline(prompt);
 		if (!input)
 			panic(123, "exit");
@@ -40,7 +40,6 @@ static void	minishell_loop(void)
 		input = ft_strtrim(input, g_shell_spaces, TMP);
 		if (!input)
 			continue ;
-		set_signals(S_SILENT, true);
 		executor(parser(lexer(input)));
 		gc_cleanup();
 	}

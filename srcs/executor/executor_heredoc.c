@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:34:01 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/06 21:11:20 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 23:41:58 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ char	*get_heredoc_filename(const uint16_t id)
 	const char *const	id_str = ft_itoa((uint16_t)id);
 	const uint16_t		size = ft_strlen(data->starting_dir) + ft_strlen(id_str) + 16;
 
-	filename = ft_calloc(size, sizeof(char));
+	filename = calloc_p(size, sizeof(char), TMP);
 	if (!filename || !id_str)
 		return (panic(ERR_MEM, "minishell: failed to allocate memory"), NULL);
 	ft_strcpy(filename, data->starting_dir);
@@ -69,11 +69,14 @@ static uint8_t	fill_in_child(const char *const limiter, const uint16_t heredoc_f
 
 	if (pid == 0)
 	{
-		set_signals(S_HEREDOC, false);
+		signal_p(SIGTERM, &safe_exit);
+		set_signals(S_HEREDOC);
 		fill_heredoc(limiter, heredoc_fd);
 	}
 	else
 	{
+		signal_p(SIGQUIT, SIG_IGN);
+		signal_p(SIGINT, SIG_IGN);
 		waitpid_p(pid, &status, 0);
 		status = WEXITSTATUS(status);
 	}
@@ -91,7 +94,9 @@ static void	fill_heredoc(const char *const limiter, const uint16_t fd)
 		str = readline("> ");
 		if (!str)
 		{
-			ft_putstr_fd("\n", STDOUT_FILENO);
+			ft_putstr_fd("minishell: warning: here-document delimited by end-of-file (wanted `", STDERR_FILENO);
+			ft_putstr_fd(limiter, STDERR_FILENO);
+			ft_putstr_fd("')\n", STDERR_FILENO);
 			break ;
 		}
 		str_len = ft_strlen(str);
