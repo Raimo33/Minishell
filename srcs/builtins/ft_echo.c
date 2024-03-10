@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 11:58:14 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/05 16:59:40 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:43:34 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ void	ft_echo(const char *const *args)
 	uint16_t	i;
 	bool		is_n;
 
+	is_n = false;
 	i = skip_flags(args, &is_n);
 	while (args[i])
 	{
@@ -37,21 +38,18 @@ static uint16_t	skip_flags(const char *const *args, bool *is_n)
 	uint16_t	i;
 	uint16_t	j;
 
-	*is_n = false;
-	i = 0;
-	if (!args[1] || args[1][0] != '-')
-		return (1);
-	while (args[++i])
+	i = 1;
+	while (args[i] && args[i][0] == '-')
 	{
-		if (args[i][0] == '-')
+		j = 1;
+		while (args[i][j])
 		{
-			j = 1;
-			while (args[i][j] == 'n')
-				j++;
-			*is_n = true;
+			if (args[i][j] != 'n')
+				return (i);
+			j++;
 		}
-		else
-			break ;
+		*is_n = true;
+		i++;
 	}
 	return (i);
 }

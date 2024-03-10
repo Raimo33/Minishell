@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:46:08 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/08 16:37:54 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:19:14 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	executor(const t_tree *const parsed_params)
 		return ;
 	}
 	g_status = (uint8_t)original_status;
-	set_signals(S_COMMAND, true);
 	launch_commands(parsed_params, -1, fds);
 	wait_for_children(parsed_params);
 	dup2_p(fds[3], STDIN_FILENO);
@@ -81,7 +80,6 @@ static void	launch_builtin_cmd(const t_tree *const node, const int8_t prev_type,
 		reset_fd(&fds[1]);
 	}
 	fds[2] = fds[0];
-	set_signals(S_COMMAND, true);
 	launch_commands(node->left, prev_type, fds);
 	dup2_p(fds[4], STDOUT_FILENO);
 }
@@ -99,7 +97,6 @@ static void	launch_standard_cmd(const t_tree *const node, const int8_t prev_type
 			reset_fd(&fds[0]);
 			reset_fd(&fds[1]);
 		}
-		set_signals(S_COMMAND, true);
 		launch_commands(node->left, prev_type, fds);
 		wait_for_children(node->left);
 		release_resources();

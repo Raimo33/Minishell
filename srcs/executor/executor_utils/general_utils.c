@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 00:48:18 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/06 21:11:20 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:19:36 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	exec(const char *const path, char *cmd_str)
 		cmd_path = get_cmd_path(path, cmd_args[0]);
 		if (!cmd_path)
 			exit(CMD_NOT_FOUND);
+		set_signals(S_COMMAND, false);
 		execve(cmd_path, cmd_args, data->envp_matrix);
 		if (errno != ENOEXEC)
 			panic(EXEC_FAILURE, ft_strjoin("minishell: failed to execute command: ", cmd_args[0], TMP));

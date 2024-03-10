@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 23:45:11 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/06 15:42:18 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 18:45:40 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*get_cmd_path(const char *const path, const char *const cmd)
 
 	full_path = NULL;
 	if (!path || !cmd)
-		return (NULL);
+		return (throw_error(cmd), release_resources(), NULL);
 	if (is_custom_bin(cmd))
 		return (get_custom_bin(cmd));
 	path_cpy = ft_strdup(path, TMP);

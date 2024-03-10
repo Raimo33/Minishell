@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:37:20 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/08 16:44:01 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 19:21:09 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,12 @@ static void	command_mode(const int32_t signo)
 {
 	if (signo == SIGINT)
 	{
-		g_status = 130;
 		ft_putstr_fd("\n", STDOUT_FILENO);
 		release_resources();
 		exit(130);
 	}
 	else if (signo == SIGQUIT)
 	{
-		g_status = 131;
 		ft_putstr_fd("\b\b  \b\b", STDOUT_FILENO);
 		ft_putstr_fd("Quit (core dumped)\n", STDOUT_FILENO);
 		release_resources();

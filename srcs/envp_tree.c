@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/01 14:12:05 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/08 16:25:46 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/10 18:49:08 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	envp_print_export(const t_tree *const root)
 
 	if (!root)
 		return ;
+	envp_print_export(root->left);
 	tmp = ft_strdup((char *)root->content, TMP);
 	sep = ft_strchr(tmp, '=');
 	if (sep)
@@ -91,6 +92,5 @@ void	envp_print_export(const t_tree *const root)
 	if (env_value && *env_value)
 		printf("=\"%s\"", env_value);
 	printf("\n");
-	envp_print_export(root->left);
 	envp_print_export(root->right);
 }
