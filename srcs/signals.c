@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:37:20 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/10 23:39:45 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:02:28 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,10 +95,7 @@ static void	interactive_mode(const int32_t signo)
 		rl_redisplay();
 	}
 	else if (signo == SIGQUIT)
-	{
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+		ft_putstr_fd("\b\b  \b\b", STDOUT_FILENO);
 }
 
 static void	heredoc_mode(const int32_t signo)
@@ -110,8 +107,5 @@ static void	heredoc_mode(const int32_t signo)
 		exit(130);
 	}
 	else if (signo == SIGQUIT)
-	{
-		rl_replace_line("", 0);
-		rl_redisplay();
-	}
+		ft_putstr_fd("\b\b  \b\b", STDOUT_FILENO);
 }

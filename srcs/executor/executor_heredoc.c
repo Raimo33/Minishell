@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 14:34:01 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/10 23:41:58 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/11 13:01:15 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ static uint8_t	fill_in_child(const char *const limiter, const uint16_t heredoc_f
 	int32_t		status;
 	const pid_t	pid = fork_p();
 
+	status = 0;
 	if (pid == 0)
 	{
 		signal_p(SIGTERM, &safe_exit);
