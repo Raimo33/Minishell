@@ -14,9 +14,9 @@
 
 bool	is_builtin(const char *const cmd_str)
 {
-	char 					*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
-	char					*cmd;
-	uint16_t				i;
+	static const char 	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
+	char			*cmd;
+	uint16_t		i;
 	static const uint8_t	n_builtins = sizeof(builtins) / sizeof(char *);
 
 	i = 0;
