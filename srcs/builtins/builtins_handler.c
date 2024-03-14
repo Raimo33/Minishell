@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins_handler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
+/*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 14:55:03 by egualand          #+#    #+#             */
-/*   Updated: 2024/03/06 19:50:16 by codespace        ###   ########.fr       */
+/*   Updated: 2024/03/14 16:41:42 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 bool	is_builtin(const char *const cmd_str)
 {
-	static const char 	*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
-	char			*cmd;
-	uint16_t		i;
+	static const char		*builtins[] = {"echo", "cd", "pwd", "export", "unset", "env", "exit"};
+	char					*cmd;
+	uint16_t				i;
 	static const uint8_t	n_builtins = sizeof(builtins) / sizeof(char *);
 
 	i = 0;

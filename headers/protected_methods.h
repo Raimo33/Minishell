@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:05:13 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/06 16:15:44 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:40:05 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void			pipe_p(int16_t *const fds);
 pid_t			fork_p(void);
 void			signal_p(const int32_t signo, const __sighandler_t handler);
 void			sigaction_p(const int32_t signo, const struct sigaction *act, struct sigaction *oldact);
-void			wait_p(int32_t *const status);
-void			waitpid_p(const pid_t pid, int32_t *const status, const int32_t options);
+pid_t			wait_p(int32_t *const status);
+pid_t			waitpid_p(const pid_t pid, int32_t *const status, const int32_t options);
 
 #endif

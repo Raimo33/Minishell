@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/19 17:46:08 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/10 23:16:48 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:45:55 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,7 @@ static void		launch_builtin_cmd(const t_tree *const node, const int8_t prev_type
 static void		launch_standard_cmd(const t_tree *const node, const int8_t prev_type, int16_t fds[5]);
 static t_tree	*skip_till_semicolon(const t_tree *const node);
 static void		child(const t_tree *const node, const int16_t fds[5], const int8_t prev_type);
-static void		parent(const t_tree *const node, int16_t fds[5], const pid_t pid);
-static void		wait_for_children(const t_tree *const node);
-static uint16_t	get_n_pipelines(const t_tree *const node);
+static void		parent(const t_tree *const node, int16_t fds[5]);
 
 void	executor(const t_tree *const parsed_params)
 {
@@ -41,7 +39,6 @@ void	executor(const t_tree *const parsed_params)
 	}
 	g_status = (uint8_t)original_status;
 	launch_commands(parsed_params, -1, fds);
-	wait_for_children(parsed_params);
 	dup2_p(fds[3], STDIN_FILENO);
 }
 
@@ -100,12 +97,11 @@ static void	launch_standard_cmd(const t_tree *const node, const int8_t prev_type
 			reset_fd(&fds[1]);
 		}
 		launch_commands(node->left, prev_type, fds);
-		wait_for_children(node->left);
 		release_resources();
 		exit(g_status);
 	}
 	else
-		parent(node, fds, pid);
+		parent(node, fds);
 }
 
 static t_tree	*skip_till_semicolon(const t_tree *const node)
@@ -132,7 +128,7 @@ static void	child(const t_tree *const node, const int16_t fds[5], const int8_t p
 	exec(ft_getenv("PATH="), elem->cmd->cmd_str);
 }
 
-static void	parent(const t_tree *const node, int16_t fds[5], const pid_t pid)
+static void	parent(const t_tree *const node, int16_t fds[5])
 {
 	const t_parser *const	elem = (t_parser *)node->content;
 	int32_t					status;
@@ -141,41 +137,8 @@ static void	parent(const t_tree *const node, int16_t fds[5], const pid_t pid)
 	fds[2] = fds[0];
 	if (elem->type != PIPELINE)
 	{
-		waitpid_p(pid, &status, 0);
-		g_status = WEXITSTATUS(status);
+		while (waitpid_p(0, &status, 0) > 0)
+			g_status = WEXITSTATUS(status);
 		reset_fd(&fds[0]);
 	}
-}
-
-static void	wait_for_children(const t_tree *const node)
-{
-	int32_t		status;
-	uint16_t	n_to_wait;
-
-	n_to_wait = get_n_pipelines(node);
-	while (n_to_wait--)
-	{
-		waitpid_p(0, &status, 0);
-		g_status = WEXITSTATUS(status);
-	}
-}
-
-static uint16_t	get_n_pipelines(const t_tree *const node)
-{
-	t_parser	*elem;
-	t_parser	*left_elem;
-	uint16_t	n;
-
-	n = 0;
-	if (!node)
-		return (n);
-	elem = (t_parser *)node->content;
-	if (elem->type == PIPELINE)
-	{
-		left_elem = (t_parser *)node->left->content;
-		if (left_elem->type == CMD && !is_builtin(left_elem->cmd->cmd_str))
-			n++;
-	}
-	n += get_n_pipelines(node->right);
-	return (n);
 }

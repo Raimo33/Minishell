@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/07 17:37:20 by marvin            #+#    #+#             */
-/*   Updated: 2024/03/11 13:02:28 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/14 16:41:24 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ static void	catch_panic(const int32_t signo, siginfo_t *const info, void *const 
 		kill(-get_data()->main_pid, SIGTERM);
 		signal_p(SIGTERM, &safe_exit);
 		release_resources();
-		while (waitpid(-1, NULL, WNOHANG) > 0)
+		while (waitpid_p(-1, NULL, WNOHANG) > 0)
 			;
 		exit(id);
 	}

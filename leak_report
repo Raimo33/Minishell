@@ -1,104 +1,38 @@
-==26894== Memcheck, a memory error detector
-==26894== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==26894== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==26894== Command: ./minishell
-==26894== 
-==26923== 
-==26923== FILE DESCRIPTORS: 0 open (0 std) at exit.
-==26923== 
-==26923== HEAP SUMMARY:
-==26923==     in use at exit: 208,168 bytes in 223 blocks
-==26923==   total heap usage: 605 allocs, 382 frees, 239,612 bytes allocated
-==26923== 
-==26923== LEAK SUMMARY:
-==26923==    definitely lost: 0 bytes in 0 blocks
-==26923==    indirectly lost: 0 bytes in 0 blocks
-==26923==      possibly lost: 0 bytes in 0 blocks
-==26923==    still reachable: 0 bytes in 0 blocks
-==26923==         suppressed: 208,168 bytes in 223 blocks
-==26923== 
-==26923== For lists of detected and suppressed errors, rerun with: -s
-==26923== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
-minishell: warning: here-document delimited by end-of-file (wanted `here')
-==26971== 
-==26971== FILE DESCRIPTORS: 0 open (0 std) at exit.
-==26971== 
-==26971== HEAP SUMMARY:
-==26971==     in use at exit: 208,176 bytes in 224 blocks
-==26971==   total heap usage: 646 allocs, 422 frees, 240,466 bytes allocated
-==26971== 
-==26971== LEAK SUMMARY:
-==26971==    definitely lost: 0 bytes in 0 blocks
-==26971==    indirectly lost: 0 bytes in 0 blocks
-==26971==      possibly lost: 0 bytes in 0 blocks
-==26971==    still reachable: 0 bytes in 0 blocks
-==26971==         suppressed: 208,176 bytes in 224 blocks
-==26971== 
-==26971== For lists of detected and suppressed errors, rerun with: -s
-==26971== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
-==26972== 
-==26972== FILE DESCRIPTORS: 0 open (0 std) at exit.
-==26972== 
-==26972== HEAP SUMMARY:
-==26972==     in use at exit: 208,325 bytes in 226 blocks
-==26972==   total heap usage: 657 allocs, 431 frees, 248,919 bytes allocated
-==26972== 
-==26972== LEAK SUMMARY:
-==26972==    definitely lost: 0 bytes in 0 blocks
-==26972==    indirectly lost: 0 bytes in 0 blocks
-==26972==      possibly lost: 0 bytes in 0 blocks
-==26972==    still reachable: 0 bytes in 0 blocks
-==26972==         suppressed: 208,325 bytes in 226 blocks
-==26972== 
-==26972== For lists of detected and suppressed errors, rerun with: -s
-==26972== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
-minishell: warning: here-document delimited by end-of-file (wanted `here')
-==27016== 
-==27016== FILE DESCRIPTORS: 0 open (0 std) at exit.
-==27016== 
-==27016== HEAP SUMMARY:
-==27016==     in use at exit: 208,184 bytes in 225 blocks
-==27016==   total heap usage: 697 allocs, 472 frees, 241,454 bytes allocated
-==27016== 
-==27016== LEAK SUMMARY:
-==27016==    definitely lost: 0 bytes in 0 blocks
-==27016==    indirectly lost: 0 bytes in 0 blocks
-==27016==      possibly lost: 0 bytes in 0 blocks
-==27016==    still reachable: 0 bytes in 0 blocks
-==27016==         suppressed: 208,184 bytes in 225 blocks
-==27016== 
-==27016== For lists of detected and suppressed errors, rerun with: -s
-==27016== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
-==27042== 
-==27042== FILE DESCRIPTORS: 0 open (0 std) at exit.
-==27042== 
-==27042== HEAP SUMMARY:
-==27042==     in use at exit: 208,333 bytes in 227 blocks
-==27042==   total heap usage: 708 allocs, 481 frees, 249,907 bytes allocated
-==27042== 
-==27042== LEAK SUMMARY:
-==27042==    definitely lost: 0 bytes in 0 blocks
-==27042==    indirectly lost: 0 bytes in 0 blocks
-==27042==      possibly lost: 0 bytes in 0 blocks
-==27042==    still reachable: 0 bytes in 0 blocks
-==27042==         suppressed: 208,333 bytes in 227 blocks
-==27042== 
-==27042== For lists of detected and suppressed errors, rerun with: -s
-==27042== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==69951== Memcheck, a memory error detector
+==69951== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==69951== Using Valgrind-3.15.0 and LibVEX; rerun with -h for copyright info
+==69951== Command: ./minishell
+==69951== 
+==69962== 
+==69962== FILE DESCRIPTORS: 0 open at exit.
+==69962== 
+==69962== HEAP SUMMARY:
+==69962==     in use at exit: 204,615 bytes in 218 blocks
+==69962==   total heap usage: 630 allocs, 412 frees, 235,808 bytes allocated
+==69962== 
+==69962== LEAK SUMMARY:
+==69962==    definitely lost: 0 bytes in 0 blocks
+==69962==    indirectly lost: 0 bytes in 0 blocks
+==69962==      possibly lost: 0 bytes in 0 blocks
+==69962==    still reachable: 0 bytes in 0 blocks
+==69962==         suppressed: 204,615 bytes in 218 blocks
+==69962== 
+==69962== For lists of detected and suppressed errors, rerun with: -s
+==69962== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 2 from 2)
 exit
-==26894== 
-==26894== FILE DESCRIPTORS: 0 open (0 std) at exit.
-==26894== 
-==26894== HEAP SUMMARY:
-==26894==     in use at exit: 208,308 bytes in 225 blocks
-==26894==   total heap usage: 701 allocs, 476 frees, 241,678 bytes allocated
-==26894== 
-==26894== LEAK SUMMARY:
-==26894==    definitely lost: 0 bytes in 0 blocks
-==26894==    indirectly lost: 0 bytes in 0 blocks
-==26894==      possibly lost: 0 bytes in 0 blocks
-==26894==    still reachable: 0 bytes in 0 blocks
-==26894==         suppressed: 208,308 bytes in 225 blocks
-==26894== 
-==26894== For lists of detected and suppressed errors, rerun with: -s
-==26894== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
+==69951== 
+==69951== FILE DESCRIPTORS: 0 open at exit.
+==69951== 
+==69951== HEAP SUMMARY:
+==69951==     in use at exit: 204,728 bytes in 216 blocks
+==69951==   total heap usage: 619 allocs, 403 frees, 235,662 bytes allocated
+==69951== 
+==69951== LEAK SUMMARY:
+==69951==    definitely lost: 0 bytes in 0 blocks
+==69951==    indirectly lost: 0 bytes in 0 blocks
+==69951==      possibly lost: 0 bytes in 0 blocks
+==69951==    still reachable: 0 bytes in 0 blocks
+==69951==         suppressed: 204,728 bytes in 216 blocks
+==69951== 
+==69951== For lists of detected and suppressed errors, rerun with: -s
+==69951== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 1 from 1)
