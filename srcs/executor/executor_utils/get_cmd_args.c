@@ -64,12 +64,12 @@ static uint16_t   count_separators(const char *str, const char sep)
 	{
 		if (*str == sep)
 		{
-		  n++;
-		  while (*str && *str == sep)
-			 str++;
+			n++;
+			while (*str && *str == sep)
+				str++;
 		}
 		else
-		  str++;
+			str++;
 	}
 	return (n);
 }
