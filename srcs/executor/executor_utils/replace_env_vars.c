@@ -6,14 +6,14 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 16:38:46 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/06 15:42:44 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/15 13:10:48 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../headers/minishell.h"
 
-static char	*expand_dollar(char *str, uint16_t *const i, const bool ignore_quotes);
-static char	*get_env_name(const char *const str, const bool ignore_quotes);
+static char	*expand_dollar(char *str, uint16_t *const i);
+static char	*get_env_name(const char *const str);
 static char	*get_env_value(const char *const env_name);
 
 void	replace_env_vars(char **const str, const bool ignore_quotes)
@@ -30,12 +30,12 @@ void	replace_env_vars(char **const str, const bool ignore_quotes)
 		else if (master_quote && (*str)[i] == master_quote)
 			master_quote = '\0';
 		if ((*str)[i] == '$' && (ignore_quotes || master_quote != '\''))
-			*str = expand_dollar(*str, &i, ignore_quotes);
+			*str = expand_dollar(*str, &i);
 		i++;
 	}
 }
 
-static char *expand_dollar(char *str, uint16_t *const i, const bool ignore_quotes)
+static char	*expand_dollar(char *str, uint16_t *const i)
 {
 	char	*new_str;
 	char	*env_name;
@@ -44,7 +44,7 @@ static char *expand_dollar(char *str, uint16_t *const i, const bool ignore_quote
 
 	start = str;
 	str += *i + 1;
-	env_name = get_env_name(str, ignore_quotes);
+	env_name = get_env_name(str);
 	if (!env_name)
 		return (start);
 	env_value = get_env_value(env_name);
@@ -56,7 +56,7 @@ static char *expand_dollar(char *str, uint16_t *const i, const bool ignore_quote
 	return (new_str);
 }
 
-static char *get_env_name(const char *const str, const bool ignore_quotes)
+static char	*get_env_name(const char *const str)
 {
 	char				*env_name;
 	uint16_t			len;
@@ -65,7 +65,7 @@ static char *get_env_name(const char *const str, const bool ignore_quotes)
 	len = 0;
 	while (str[len] && ft_strchr(stop_chars, str[len]) == NULL)
 		len++;
-	if (len == 0 && (!is_quote(str[len]) || ignore_quotes))
+	if (len == 0)
 		return (NULL);
 	env_name = (char *)malloc_p(sizeof(char) * (len + 1), TMP);
 	ft_strlcpy(env_name, str, len + 1);
