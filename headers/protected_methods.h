@@ -6,7 +6,7 @@
 /*   By: craimond <bomboclat@bidol.juis>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:05:13 by craimond          #+#    #+#             */
-/*   Updated: 2024/03/14 16:40:05 by craimond         ###   ########.fr       */
+/*   Updated: 2024/03/15 16:48:57 by craimond         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ struct dirent	*readdir_p(const DIR *const dir);
 char			*getcwd_p(const char *const buf, const size_t size, const uint8_t alloc_type);
 uint16_t		dup_p(const uint16_t fd);
 void			dup2_p(const uint16_t oldfd, const uint16_t newfd);
-uint16_t		open_p(const char *const path, const int32_t flags, const uint16_t mode);
+int16_t			open_p(const char *const path, const int32_t flags, const uint16_t mode);
 void			close_p(const int16_t fd);
 void			reset_fd(int16_t *const fd);
 void			pipe_p(int16_t *const fds);
